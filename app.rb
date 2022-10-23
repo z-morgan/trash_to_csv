@@ -2,6 +2,8 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'tilt/erubis'
 
+require_relative "TSI_converter"
+
 configure :development do
   set :server, 'webrick'
   also_reload 'lib/*.rb'
@@ -18,6 +20,7 @@ end
 
 post "/" do
   @raw = params[:raw]
-  @csv_data = @raw.upcase
+  @csv_data = convert_TSI_to_CSV(@raw)
+  p @csv_data
   erb :index
 end

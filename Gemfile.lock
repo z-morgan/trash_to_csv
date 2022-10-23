@@ -24,8 +24,10 @@ GEM
       sinatra (= 2.2.2)
       tilt (~> 2.0)
     tilt (2.0.11)
+    webrick (1.7.0)
 
 PLATFORMS
+  arm64-darwin-21
   x86_64-linux
 
 DEPENDENCIES
@@ -34,6 +36,7 @@ DEPENDENCIES
   rack-test
   sinatra (~> 2.2.0)
   sinatra-contrib (~> 2.2.0)
+  webrick (~> 1.7)
 
 RUBY VERSION
    ruby 3.0.0p0

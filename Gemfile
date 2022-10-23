@@ -7,3 +7,4 @@ gem "sinatra-contrib", "~>2.2.0"
 gem "erubis"
 gem "rack-test"
 gem "minitest"
+gem 'webrick', '~> 1.7'
