@@ -1,0 +1,11 @@
+Trash to CSV
+
+Trash to CSV is a small ruby web app which consists of a single page. 
+A user is able to paste in text with a specific format, and then submit the form.
+The page then displays the same data in a CSV format which the user can then copy
+and paste into excel.
+
+To do:
+write the homepage
+  
+write the result page

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Trash to CSV</title>
+    <link rel="stylesheet" href="/stylesheets/app.css">
+  </head>
+  <body>
+    <header>
+    </header>
+    <main>
+      <br>
+      <div>
+        <aside><%= session.delete(:msg) %></aside>
+      </div>
+      <br>
+
+      <%= yield %>
+    </main>
+  </body>
+</html>
