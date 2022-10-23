@@ -1,0 +1,6 @@
+services:
+- type: web
+  name: trash_to_csv
+  env: ruby
+  buildCommand: bundle install
+  startCommand: ruby app.rb
