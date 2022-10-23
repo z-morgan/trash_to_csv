@@ -2,7 +2,7 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'tilt/erubis'
 
-require_relative "TSI_converter"
+require_relative "lib/TSI_converter"
 
 configure :development do
   set :server, 'webrick'
