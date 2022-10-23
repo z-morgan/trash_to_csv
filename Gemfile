@@ -8,3 +8,7 @@ gem "erubis"
 gem "rack-test"
 gem "minitest"
 gem 'webrick', '~> 1.7'
+
+group :production do
+  gem "puma"
+end
