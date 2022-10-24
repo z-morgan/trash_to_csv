@@ -1,10 +1,26 @@
 <form action="/" method="post">
-  <label>TSI data input:
-    <textarea name="raw" rows="10" cols="80" required><%= @raw %></textarea>
-  </label>
+  <p>Choose a conversion algorithm</p>
+
+  <input type="radio" id="Hydra" name="algorithm" value="Hydra" <%= "checked" unless params[:algorithm] == "TSI" %>>
+  <label for="Hydra">Hydra data logger</label>
+
+  <input type="radio" id="TSI" name="algorithm" value="TSI" <%= "checked" if params[:algorithm] == "TSI" %>>
+  <label for="TSI">TSI.nfy</label>
+
+  <br>
+  <br>
+  <br>
+  <label for="input">data input:</label>
+  <textarea id="input" name="raw" rows="10" cols="80" required><%= @raw %></textarea>
+
   <input type="submit" value="Submit">
 </form>
 
+<br>
+<br>
+<br>
 <form>
-  <textarea rows="10" cols="80"><%= @csv_data %></textarea>
+  <label>CSV output
+    <textarea rows="10" cols="80"><%= @csv_data %></textarea>
+  </label>
 </form>

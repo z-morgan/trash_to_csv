@@ -3,6 +3,7 @@ require 'sinatra/reloader' if development?
 require 'tilt/erubis'
 
 require_relative "lib/TSI_converter"
+require_relative "lib/hydra_converter"
 
 configure :development do
   set :server, 'webrick'
@@ -20,7 +21,12 @@ end
 
 post "/" do
   @raw = params[:raw]
-  @csv_data = convert_TSI_to_CSV(@raw)
-  p @csv_data
+
+  if params[:algorithm] == "Hydra"
+    @csv_data = convert_hydra_to_CSV(@raw)
+  elsif params[:algorithm] == "TSI"
+    @csv_data = convert_TSI_to_CSV(@raw)
+  end
+
   erb :index
 end
