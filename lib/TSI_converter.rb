@@ -1,65 +1,6 @@
-=begin
-method converts this string:
-
-ESS:TESTSTAND:X-601:ET100,2022/10/19 16:29:20,0.000000
-ESS:TESTSTAND:X-601:ET102,2022/10/19 16:29:20,0.005203
-ESS:TESTSTAND:X-601:FT340,2022/10/19 16:29:20,0.000000
-
-to CSV format:
-Date, Time, ET100, ET102, FT340,
-2022/10/19, 16:29:20, 0.000000, 0.05203, 0.000000
-
-assumptions:
-- the input string represents a large number of input nodes, which eventually repeat
-with new time snapshots.
-- nodes always occur in the same order for each time data point
-
-
-
-
-D: 
-nested array? - data needs to be ordered.
-[['Date', 'Time', 'ET100', 'ET102', 'FT340'], ['2022/10/19', '16:29:20', '0.000000', '0.05203', '0.000000']]
-
-
-A:
-initialize a result array
-push on a two element array containg the strings 'Date' and 'Time'
-
-split the input string into an array of lines
-  create a new array of lines array with a sub-array for each line where:
-  the first element in the subarray is the node title
-  the second element in the subarray is the date
-  the third element in the subarray is the time point
-  the fourth element in the subarray is the data value
-
-set a variable `start_time` to the time in the first line
-iterate through the array of lines, until the current line has a time different from the start_time:
-  get the node title, and push it onto the first sub-array of the result array
-(alternatively, just get all of the unique node titles from the array of lines)
-
-get all of the unique times from the array of lines:
-for each unique time, 
-  add a new sub-array to the results array
-  push on the date and the current time point as elements
-  push on `nil` until the length of the new sub-array equals the length of the first sub-array in result array
-
-iterate through the array of lines and for each:
-  extract the time
-  extract the node title
-  extract the data value
-  find the index of the probe title in the first result sub-array
-  find the index of the subarray for the time point
-  add the data value into the subarray at the identified position
-
-join the elements of each sub-array in the result array into a string with ', ' as the delimiter
-join the elements of the result array into a string with '\n' as the delimiter
-
-=end
-
 def extract_data(str)
   str.split("\n").map do |line|
-    tsi_regex = /ESS:TESTSTAND:.+:(.*),(.*\/.*\/.*) (.*),([\.\d]*)/
+    tsi_regex = /\w+:\w+:.+:(.*),(.*\/.*\/.*) (.*),([\.\d]*)/
     matches = line.match(tsi_regex)
     [matches[1], matches[2], matches[3], matches[4]]
   end
@@ -105,15 +46,3 @@ def convert_TSI_to_CSV(input_str)
   
   result.map{|row| row.join(', ')}.join("\n")
 end
-
-
-# input_string =<<~TSI
-#   ESS:TESTSTAND:X-601:ET100,2022/10/19 16:29:20,0.000000
-#   ESS:TESTSTAND:X-601:ET102,2022/10/19 16:29:20,0.005203
-#   ESS:TESTSTAND:X-601:FT340,2022/10/19 16:29:20,0.000000
-#   ESS:TESTSTAND:X-601:ET100,2022/10/19 16:29:24,0.000200
-#   ESS:TESTSTAND:X-601:ET102,2022/10/19 16:29:24,0.004000
-#   ESS:TESTSTAND:X-601:FT340,2022/10/19 16:29:24,0.060000
-# TSI
-
-# puts convert_TSI_to_CSV(input_string)
