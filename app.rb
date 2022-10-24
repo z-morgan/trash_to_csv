@@ -6,11 +6,12 @@ require_relative "lib/TSI_converter"
 require_relative "lib/hydra_converter"
 
 configure :development do
-  set :server, 'webrick'
+  # set :server, 'webrick'
   also_reload 'lib/*.rb'
 end
 
 configure do
+  set :server, 'webrick'
   enable :sessions
   set :session_secret, "secret"
 end
